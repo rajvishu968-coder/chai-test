@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Falane Ki Chai — Stay Grounded with Great Coffee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2B1810;
+    --maroon:#3E2015;
+    --rust:#C1502E;
+    --rust-dark:#9C3D22;
+    --turmeric:#E8A33D;
+    --cardamom:#5C7A52;
+    --cardamom-dark:#3F5638;
+    --cream:#F5E6D3;
+    --steam:#FFF8ED;
+    --ink-line: rgba(245,230,211,0.14);
+    --font-display: 'Baloo 2', cursive;
+    --font-body: 'Poppins', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family: var(--font-body);
+    background: var(--ink);
+    color: var(--cream);
+    -webkit-font-smoothing: antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 28px;}
+  @media (min-width:900px){ .wrap{padding:0 60px;} }
+
+  h1,h2,h3,.display{
+    font-family: var(--font-display);
+    font-weight:700;
+    letter-spacing:0.01em;
+  }
+  .eyebrow{
+    font-family: var(--font-body);
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.18em;
+    font-size:12.5px;
+    color: var(--turmeric);
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+  }
+
+  /* Focus visibility */
+  a:focus-visible, button:focus-visible, summary:focus-visible{
+    outline: 2px solid var(--turmeric);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* ---------- Scallop divider (awning fringe) ---------- */
+  .scallop{
+    height:26px;
+    width:100%;
+    background-repeat: repeat-x;
+    background-size: 32px 32px;
+  }
+  .scallop--to-ink{ background-image: radial-gradient(circle at 16px 0, transparent 16px, var(--ink) 16.5px); background-color: var(--maroon); }
+  .scallop--to-cream{ background-image: radial-gradient(circle at 16px 0, transparent 16px, var(--cream) 16.5px); background-color: var(--maroon); }
+  .scallop--to-maroon{ background-image: radial-gradient(circle at 16px 0, transparent 16px, var(--maroon) 16.5px); background-color: var(--ink); }
+  .scallop--flip{ transform: rotate(180deg); }
+
+  /* ---------- Header ---------- */
+  header{
+    position: sticky; top:0; z-index:50;
+    background: rgba(43,24,16,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--ink-line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 16px 0;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand-mark{ width:38px; height:38px; flex-shrink:0; }
+  .brand-name{ font-family: var(--font-display); font-size:20px; font-weight:700; letter-spacing:0.01em; color:var(--steam); line-height:1;}
+  .brand-name span{ display:block; font-family:var(--font-body); font-weight:400; font-size:10px; letter-spacing:0.14em; color:var(--turmeric); text-transform:uppercase; margin-top:3px;}
+  .nav-links{ display:none; gap:30px; align-items:center; }
+  .nav-links a{
+    font-size:14.5px; font-weight:500; color: var(--cream); opacity:0.85;
+    position:relative; padding:4px 0;
+  }
+  .nav-links a:hover{ opacity:1; color:var(--turmeric); }
+  @media (min-width:880px){ .nav-links{ display:flex; } }
+  .call-btn{
+    background: var(--turmeric); color: var(--ink); font-weight:700;
+    font-size:13.5px; padding:10px 18px; border-radius:999px;
+    display:none; align-items:center; gap:8px; white-space:nowrap;
+    box-shadow: 0 4px 0 var(--rust-dark);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .call-btn:hover{ transform: translateY(2px); box-shadow: 0 2px 0 var(--rust-dark); }
+  @media (min-width:600px){ .call-btn{ display:inline-flex; } }
+  .menu-toggle{
+    display:flex; background:none; border:1px solid var(--ink-line); color:var(--cream);
+    width:42px; height:42px; border-radius:10px; align-items:center; justify-content:center; cursor:pointer;
+  }
+  @media (min-width:880px){ .menu-toggle{ display:none; } }
+  .mobile-panel{
+    display:none; flex-direction:column; gap:2px; padding: 6px 0 18px;
+    border-top:1px solid var(--ink-line);
+  }
+  .mobile-panel.open{ display:flex; }
+  .mobile-panel a{ padding:12px 4px; font-weight:500; border-bottom:1px dashed var(--ink-line); font-size:15px; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    background: linear-gradient(180deg, var(--maroon) 0%, var(--ink) 100%);
+    padding: 64px 0 40px;
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid; grid-template-columns:1fr; gap:40px; align-items:center;
+  }
+  @media (min-width:900px){ .hero .wrap{ grid-template-columns: 1.05fr 0.95fr; gap:20px; } }
+  .hero-copy .eyebrow{ margin-bottom:14px; display:inline-block; }
+  .hero h1{
+    font-size: 52px; line-height:0.98; color:var(--steam);
+    text-shadow: 3px 3px 0 var(--rust-dark);
+  }
+  @media (min-width:640px){ .hero h1{ font-size:74px; } }
+  @media (min-width:1080px){ .hero h1{ font-size:86px; } }
+  .hero-divider{ width:70px; height:5px; background:var(--turmeric); border-radius:4px; margin:22px 0; }
+  .hero-tag{ font-size:19px; font-weight:400; color:var(--cream); max-width:440px; opacity:0.92; font-style:italic; }
+  .hero-sub{ margin-top:14px; font-size:15px; color:var(--cream); opacity:0.72; max-width:440px; line-height:1.6; }
+  .hero-ctas{ display:flex; flex-wrap:wrap; gap:14px; margin-top:32px; }
+  .btn-primary{
+    background: var(--turmeric); color:var(--ink); font-weight:700; font-size:14.5px;
+    padding:15px 28px; border-radius:999px; text-transform:uppercase; letter-spacing:0.03em;
+    box-shadow: 0 5px 0 var(--rust-dark);
+    transition: transform .15s ease, box-shadow .15s ease;
+    display:inline-block;
+  }
+  .btn-primary:hover{ transform:translateY(3px); box-shadow:0 2px 0 var(--rust-dark); }
+  .btn-secondary{
+    border:1.5px solid var(--cream); color:var(--cream); font-weight:600; font-size:14.5px;
+    padding:14px 26px; border-radius:999px; letter-spacing:0.02em;
+    transition: background .15s ease;
+  }
+  .btn-secondary:hover{ background: rgba(245,230,211,0.1); }
+
+  /* Kulhad illustration */
+  .hero-art{ position:relative; display:flex; justify-content:center; }
+  .kulhad-wrap{ position:relative; width: min(100%, 380px); }
+  .steam-path{
+    stroke: var(--steam);
+    stroke-width: 5;
+    fill:none;
+    stroke-linecap:round;
+    opacity:0;
+    transform-origin: bottom center;
+  }
+  .steam-1{ animation: rise 3.4s ease-in-out infinite; }
+  .steam-2{ animation: rise 3.4s ease-in-out infinite; animation-delay: 1.1s; }
+  .steam-3{ animation: rise 3.4s ease-in-out infinite; animation-delay: 2.2s; }
+  @keyframes rise{
+    0%{ opacity:0; transform: translateY(0) scaleY(0.6); }
+    20%{ opacity:0.75; }
+    75%{ opacity:0.25; }
+    100%{ opacity:0; transform: translateY(-46px) scaleY(1.15); }
+  }
+
+  /* ---------- Value props ---------- */
+  .values{ background: var(--cream); color: var(--ink); padding: 56px 0 64px; }
+  .values-grid{ display:grid; grid-template-columns:1fr; gap:22px; margin-top:34px; }
+  @media (min-width:700px){ .values-grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (min-width:1020px){ .values-grid{ grid-template-columns: repeat(4,1fr); } }
+  .value-card{
+    background: var(--steam); border-radius:16px; padding:26px 22px;
+    border: 1.5px solid rgba(43,24,16,0.08);
+    box-shadow: 0 8px 0 rgba(43,24,16,0.06);
+  }
+  .value-icon{ width:44px; height:44px; margin-bottom:16px; }
+  .value-card h3{ font-size:19px; margin-bottom:8px; color:var(--rust-dark); }
+  .value-card p{ font-size:14.5px; line-height:1.55; opacity:0.78; }
+  .section-head{ max-width:560px; }
+  .section-head h2{ font-size:34px; margin-top:8px; line-height:1.05;}
+  @media (min-width:640px){ .section-head h2{ font-size:42px; } }
+
+  /* ---------- Menu ---------- */
+  .menu-section{ background: var(--ink); padding: 64px 0 60px; }
+  .menu-section .section-head h2{ color:var(--steam); }
+  .menu-grid{ display:grid; grid-template-columns:1fr; gap:18px; margin-top:36px; }
+  @media (min-width:640px){ .menu-grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (min-width:980px){ .menu-grid{ grid-template-columns: repeat(3,1fr); } }
+  .menu-card{
+    background: var(--maroon); border-radius:14px; padding:22px;
+    display:flex; justify-content:space-between; align-items:flex-start; gap:14px;
+    border:1px solid var(--ink-line);
+    position:relative;
+  }
+  .menu-card h3{ font-size:19px; color:var(--steam); margin-bottom:6px; }
+  .menu-card p{ font-size:13.5px; color:var(--cream); opacity:0.68; line-height:1.5; max-width:200px;}
+  .price-tag{
+    background: var(--turmeric); color:var(--ink); font-weight:700; font-size:14px;
+    padding:8px 12px; border-radius:8px; white-space:nowrap; transform: rotate(3deg);
+    box-shadow: 0 3px 0 var(--rust-dark); font-family: var(--font-display);
+  }
+  .menu-cta{ margin-top:38px; text-align:center; }
+
+  /* ---------- Story ---------- */
+  .story{ background: var(--cardamom-dark); padding: 62px 0; position:relative; }
+  .story .wrap{ display:grid; grid-template-columns:1fr; gap:36px; align-items:center; }
+  @media (min-width:880px){ .story .wrap{ grid-template-columns: 0.85fr 1.15fr; gap:56px; } }
+  .story-badge{
+    width:180px; height:180px; border-radius:50%; border:3px dashed var(--turmeric);
+    display:flex; align-items:center; justify-content:center; margin:0 auto;
+    transform: rotate(-6deg);
+  }
+  .story-badge-inner{ text-align:center; font-family:var(--font-display); font-size:15px; color:var(--turmeric); line-height:1.3; padding:10px; text-transform:uppercase; letter-spacing:0.05em;}
+  .story h2{ color:var(--steam); font-size:32px; margin-bottom:16px; }
+  @media (min-width:640px){ .story h2{ font-size:38px; } }
+  .story p{ font-size:15.5px; line-height:1.75; color:var(--cream); opacity:0.88; max-width:520px; }
+  .story p + p{ margin-top:14px; }
+  .story-link{ display:inline-block; margin-top:22px; font-weight:600; color:var(--turmeric); border-bottom:2px solid var(--turmeric); padding-bottom:2px;}
+
+  /* ---------- Reviews ---------- */
+  .reviews{ background: var(--cream); color:var(--ink); padding:64px 0 60px; }
+  .reviews-top{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:20px; }
+  .rating-badge{
+    background: var(--ink); color:var(--steam); border-radius:14px; padding:16px 22px;
+    display:flex; align-items:center; gap:14px; flex-shrink:0;
+  }
+  .rating-badge strong{ font-family:var(--font-display); font-size:26px; color:var(--turmeric); }
+  .rating-badge span{ font-size:12.5px; opacity:0.75; display:block; }
+  .reviews-grid{ display:grid; grid-template-columns:1fr; gap:24px; margin-top:42px; }
+  @media (min-width:700px){ .reviews-grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (min-width:1020px){ .reviews-grid{ grid-template-columns: repeat(4,1fr); } }
+  .review-card{
+    background: var(--steam); border-radius:4px 4px 14px 14px; padding:24px 20px 20px;
+    box-shadow: 0 10px 22px rgba(43,24,16,0.12);
+    position:relative;
+  }
+  .review-card:nth-child(odd){ transform: rotate(-1.4deg); }
+  .review-card:nth-child(even){ transform: rotate(1.4deg); }
+  .review-tape{
+    position:absolute; top:-10px; left:50%; transform:translateX(-50%) rotate(-3deg);
+    width:56px; height:20px; background: rgba(232,163,61,0.55); border:1px solid rgba(232,163,61,0.7);
+  }
+  .stars{ color: var(--turmeric); font-size:15px; letter-spacing:2px; margin-bottom:10px; }
+  .review-card p{ font-size:14.5px; line-height:1.6; font-style:italic; color:var(--ink); opacity:0.85; }
+  .review-name{ margin-top:14px; font-weight:700; font-size:13.5px; color:var(--rust-dark); font-family:var(--font-display); }
+
+  /* ---------- FAQ ---------- */
+  .faq{ background: var(--cardamom-dark); padding:64px 0 70px; }
+  .faq .section-head h2{ color:var(--steam); }
+  .faq-board{
+    margin-top:36px; background: var(--ink); border-radius:18px; padding: 10px 8px;
+    border: 6px solid var(--maroon);
+  }
+  details{
+    border-bottom:1px dashed var(--ink-line);
+    padding: 6px 14px;
+  }
+  details:last-child{ border-bottom:none; }
+  summary{
+    cursor:pointer; list-style:none; padding:16px 34px 16px 4px; position:relative;
+    font-weight:600; font-size:15.5px; color:var(--steam);
+  }
+  summary::-webkit-details-marker{ display:none; }
+  summary::after{
+    content:"+"; position:absolute; right:6px; top:50%; transform:translateY(-50%);
+    font-family:var(--font-display); font-size:22px; color:var(--turmeric);
+    transition: transform .2s ease;
+  }
+  details[open] summary::after{ transform:translateY(-50%) rotate(45deg); }
+  .faq-answer{ padding: 0 4px 18px; font-size:14.5px; line-height:1.65; color:var(--cream); opacity:0.78; max-width:640px;}
+  .faq-note{ text-align:center; margin-top:26px; font-size:14.5px; color:var(--cream); opacity:0.8;}
+  .faq-note a{ color:var(--turmeric); font-weight:600; border-bottom:1px solid var(--turmeric);}
+
+  /* ---------- Newsletter ---------- */
+  .newsletter{ background: var(--rust); padding: 48px 0; }
+  .newsletter .wrap{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:22px; }
+  .newsletter h3{ font-size:24px; color:var(--ink); max-width:360px; }
+  .newsletter p{ font-size:13.5px; color:var(--ink); opacity:0.8; margin-top:6px; }
+  .nl-form{ display:flex; gap:0; max-width:380px; width:100%; }
+  .nl-form input{
+    flex:1; padding:14px 16px; border:none; border-radius:999px 0 0 999px;
+    font-family:var(--font-body); font-size:14px; outline:none;
+  }
+  .nl-form button{
+    background:var(--ink); color:var(--steam); border:none; padding:0 22px; border-radius:0 999px 999px 0;
+    font-weight:700; cursor:pointer; font-size:13.5px;
+  }
+  .socials{ display:flex; gap:14px; }
+  .socials a{
+    width:38px; height:38px; border-radius:50%; border:1.5px solid var(--ink); display:flex;
+    align-items:center; justify-content:center; color:var(--ink); font-size:14px; font-weight:700;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{ background: var(--ink); padding: 50px 0 26px; }
+  .footer-grid{ display:grid; grid-template-columns:1fr; gap:32px; }
+  @media (min-width:760px){ .footer-grid{ grid-template-columns: 1.3fr 1fr 1fr; } }
+  .footer-brand p{ font-size:13.5px; opacity:0.65; margin-top:10px; max-width:280px; line-height:1.6;}
+  footer h4{ font-family:var(--font-body); font-size:12.5px; text-transform:uppercase; letter-spacing:0.14em; color:var(--turmeric); margin-bottom:14px;}
+  footer ul li{ margin-bottom:9px; font-size:14px; opacity:0.78; }
+  footer ul li a:hover{ opacity:1; color:var(--turmeric); }
+  .footer-bottom{
+    margin-top:40px; padding-top:20px; border-top:1px solid var(--ink-line);
+    display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; font-size:12.5px; opacity:0.55;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="nav">
+      <a href="#top" class="brand" aria-label="Falane Ki Chai home">
+        <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M10 20 L38 20 L34 41 C34 43 32 44 30 44 L18 44 C16 44 14 43 14 41 Z" fill="#C1502E"/>
+          <path d="M10 20 L38 20 L37 25 L11 25 Z" fill="#E8A33D"/>
+          <path d="M38 22 C43 22 44 30 38 31" stroke="#F5E6D3" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-name">FALANE KI CHAI<span>Stay grounded, cup by cup</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#menu">Menu</a>
+        <a href="#story">Our Story</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="call-btn" href="tel:08318170758">☎ 08318170758</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="20" height="16" viewBox="0 0 20 16" fill="none"><rect width="20" height="2" fill="#F5E6D3"/><rect y="7" width="20" height="2" fill="#F5E6D3"/><rect y="14" width="20" height="2" fill="#F5E6D3"/></svg>
+      </button>
+    </div>
+    <div class="mobile-panel" id="mobilePanel">
+      <a href="#menu">Menu</a>
+      <a href="#story">Our Story</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+      <a href="tel:08318170758">☎ Call 08318170758</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">Est. one kettle, one bench</span>
+        <h1>FALANE<br>KI CHAI</h1>
+        <div class="hero-divider"></div>
+        <p class="hero-tag">Stay Grounded with Great Coffee.</p>
+        <p class="hero-sub">Kadak chai, honest coffee, and a bench that's always got room for one more. No frills — just the good stuff, served hot.</p>
+        <div class="hero-ctas">
+          <a href="#menu" class="btn-primary">See the Menu</a>
+          <a href="#contact" class="btn-secondary">Find Our Adda</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="kulhad-wrap">
+          <svg viewBox="0 0 340 380" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path class="steam-path steam-1" d="M120 150 C 105 130, 135 115, 120 95 C 108 78, 132 65, 122 45"/>
+            <path class="steam-path steam-2" d="M170 150 C 155 128, 188 112, 172 90 C 158 72, 185 58, 170 38"/>
+            <path class="steam-path steam-3" d="M220 150 C 205 130, 235 115, 220 95 C 208 78, 232 65, 222 45"/>
+            <ellipse cx="170" cy="330" rx="118" ry="16" fill="#000" opacity="0.18"/>
+            <path d="M78 175 L262 175 L232 305 C230 318 216 328 198 328 L142 328 C124 328 110 318 108 305 Z" fill="#C1502E"/>
+            <path d="M78 175 L262 175 L254 200 L86 200 Z" fill="#9C3D22"/>
+            <path d="M92 210 L248 210 L238 235 L102 235 Z" fill="#F5E6D3" opacity="0.12"/>
+            <ellipse cx="170" cy="176" rx="92" ry="12" fill="#E8A33D"/>
+            <ellipse cx="170" cy="174" rx="82" ry="8" fill="#3E2015"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="scallop scallop--to-cream"></div>
+
+  <!-- VALUES -->
+  <section class="values">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow" style="color:var(--rust-dark)">Why regulars come back</span>
+        <h2>Nothing fancy. Just done right, every time.</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <svg class="value-icon" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="20" fill="#F0DFC4"/><path d="M14 22 L20 28 L30 16" stroke="#C1502E" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Kadak &amp; Consistent</h3>
+          <p>The same strong brew, every single cup, every single day. No bad-mood batches here.</p>
+        </div>
+        <div class="value-card">
+          <svg class="value-icon" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="20" fill="#F0DFC4"/><path d="M22 10 C 22 20, 12 20, 12 30 C 12 36, 17 40, 22 40 C 27 40, 32 36, 32 30 C 32 20, 22 20, 22 10 Z" fill="#5C7A52"/></svg>
+          <h3>Fresh Adrak, Fresh Masala</h3>
+          <p>Ginger crushed and elaichi cracked each morning. No powders, no shortcuts.</p>
+        </div>
+        <div class="value-card">
+          <svg class="value-icon" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="20" fill="#F0DFC4"/><path d="M14 18 L30 18 L27 34 C27 36 25 37 23 37 L21 37 C19 37 17 36 17 34 Z" fill="#C1502E"/></svg>
+          <h3>Kulhad Ki Khushboo</h3>
+          <p>Served the old way, in clay, for that earthy first sip you can't get any other way.</p>
+        </div>
+        <div class="value-card">
+          <svg class="value-icon" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="20" fill="#F0DFC4"/><path d="M22 12 L22 22 L29 27" stroke="#E8A33D" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="22" r="12" stroke="#E8A33D" stroke-width="2.5" fill="none"/></svg>
+          <h3>Open Till Late</h3>
+          <p>Because the best conversations happen after 9pm, over a second round.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="scallop scallop--to-ink scallop--flip"></div>
+
+  <!-- MENU -->
+  <section class="menu-section" id="menu">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">On the board today</span>
+        <h2>A cup for every mood.</h2>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div><h3>Cutting Chai</h3><p>The classic half-cup. Strong, quick, gone in two sips.</p></div>
+          <span class="price-tag">₹15</span>
+        </div>
+        <div class="menu-card">
+          <div><h3>Masala Chai</h3><p>Our house blend — five spices, full cup, full comfort.</p></div>
+          <span class="price-tag">₹25</span>
+        </div>
+        <div class="menu-card">
+          <div><h3>Adrak Elaichi Chai</h3><p>Heavy on ginger and cardamom, for the Monday-morning fix.</p></div>
+          <span class="price-tag">₹30</span>
+        </div>
+        <div class="menu-card">
+          <div><h3>Kesar Chai</h3><p>Saffron-laced and slow-simmered. The special-occasion cup.</p></div>
+          <span class="price-tag">₹40</span>
+        </div>
+        <div class="menu-card">
+          <div><h3>Filter Coffee</h3><p>South-style, frothed by hand, served the way it should be.</p></div>
+          <span class="price-tag">₹35</span>
+        </div>
+        <div class="menu-card">
+          <div><h3>Kulhad Bournvita</h3><p>The nostalgia order. Malty, sweet, and always a second-round pick.</p></div>
+          <span class="price-tag">₹20</span>
+        </div>
+      </div>
+      <div class="menu-cta">
+        <a href="#contact" class="btn-secondary">View Full Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story" id="story">
+    <div class="wrap">
+      <div class="story-badge">
+        <div class="story-badge-inner">Roadside<br>Se Started<br>★ 2018 ★</div>
+      </div>
+      <div>
+        <span class="eyebrow" style="color:var(--turmeric)">How it started</span>
+        <h2>Every mohalla has one.</h2>
+        <p>You know the one — that stall everyone calls by a name instead of a brand. "Falane ki chai," they'd say. So-and-so's chai. Ours started exactly like that: a kettle, a bench, and a few regulars who kept showing up.</p>
+        <p>We never got around to picking a fancier name. Turns out we didn't need to — the chai did the talking, and the name just stuck.</p>
+        <a href="#contact" class="story-link">Read the full story →</a>
+      </div>
+    </div>
+  </section>
+  <div class="scallop scallop--to-cream"></div>
+
+  <!-- REVIEWS -->
+  <section class="reviews" id="reviews">
+    <div class="wrap">
+      <div class="reviews-top">
+        <div class="section-head">
+          <span class="eyebrow" style="color:var(--rust-dark)">Word on the bench</span>
+          <h2>What regulars are saying</h2>
+        </div>
+        <div class="rating-badge">
+          <strong>4.8★</strong>
+          <span>from 1,200+<br>regulars</span>
+        </div>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-tape"></div>
+          <div class="stars">★★★★★</div>
+          <p>"Best cutting chai in the city, hands down. I've tried to find better. I've failed."</p>
+          <div class="review-name">— Aisha R.</div>
+        </div>
+        <div class="review-card">
+          <div class="review-tape"></div>
+          <div class="stars">★★★★★</div>
+          <p>"Feels like my nani's kitchen, minus the lecture about getting married. Plus wifi."</p>
+          <div class="review-name">— Rohan M.</div>
+        </div>
+        <div class="review-card">
+          <div class="review-tape"></div>
+          <div class="stars">★★★★☆</div>
+          <p>"Their adrak chai fixes my Monday. Every Monday. Send help, or don't."</p>
+          <div class="review-name">— Priya S.</div>
+        </div>
+        <div class="review-card">
+          <div class="review-tape"></div>
+          <div class="stars">★★★★★</div>
+          <p>"Kulhad chai plus evening chaat at the next stall over. That's a whole personality now."</p>
+          <div class="review-name">— Karan V.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="scallop scallop--to-maroon"></div>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow" style="color:var(--turmeric)">Before you ask</span>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <div class="faq-board">
+        <details open>
+          <summary>What are your timings?</summary>
+          <div class="faq-answer">We're pouring from 7 AM to 11 PM, every single day of the week — including holidays, because chai doesn't take a day off.</div>
+        </details>
+        <details>
+          <summary>Do you deliver, or is it takeaway/dine-in only?</summary>
+          <div class="faq-answer">All three. Grab a bench and stay a while, take it to go, or call us on 08318170758 to arrange a delivery nearby.</div>
+        </details>
+        <details>
+          <summary>Do you have vegetarian and vegan options?</summary>
+          <div class="faq-answer">Everything on the board is vegetarian. For vegan, ask us to make your cup with a plant-based milk — we keep it on hand.</div>
+        </details>
+        <details>
+          <summary>Do you take card and UPI payments?</summary>
+          <div class="faq-answer">Yes — cash, card, and UPI are all welcome. No minimum order, no fuss.</div>
+        </details>
+        <details>
+          <summary>Can I pre-order for pickup?</summary>
+          <div class="faq-answer">Absolutely. Call ahead on 08318170758 and your order will be ready in a kulhad by the time you walk in.</div>
+        </details>
+        <details>
+          <summary>Can I book the space for a small get-together?</summary>
+          <div class="faq-answer">We can hold the bench for small groups after 8 PM. Give us a call to check availability for your date.</div>
+        </details>
+        <details>
+          <summary>Do you serve snacks alongside the chai?</summary>
+          <div class="faq-answer">Always. Ask what's fresh off the tawa that day — it changes, but it's never boring.</div>
+        </details>
+      </div>
+      <p class="faq-note">Still have a question? <a href="#contact">Call us directly</a> — we actually pick up.</p>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter" id="contact">
+    <div class="wrap">
+      <div>
+        <h3>Get the schedule &amp; specials.</h3>
+        <p>One message when the specials board changes. Nothing else, promise.</p>
+      </div>
+      <form class="nl-form" onsubmit="return false;">
+        <label for="nl-email" style="position:absolute; left:-9999px;">Email address</label>
+        <input id="nl-email" type="email" placeholder="you@example.com" required>
+        <button type="submit">Sign Up</button>
+      </form>
+      <div class="socials" aria-label="Social media">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Facebook">FB</a>
+        <a href="#" aria-label="TikTok">TT</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand-name" style="font-size:22px;">FALANE KI CHAI</div>
+        <p>Stay grounded with great coffee — and chai kadak enough to keep you honest. Same bench, same kettle, since 2018.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get In Touch</h4>
+        <ul>
+          <li><a href="tel:08318170758">📞 08318170758</a></li>
+          <li>Open 7 AM – 11 PM, daily</li>
+          <li>Instagram · Facebook · TikTok</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Falane Ki Chai. All rights reserved.</span>
+      <span>Privacy · Terms</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const panel = document.getElementById('mobilePanel');
+  toggle.addEventListener('click', () => {
+    const isOpen = panel.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen);
+  });
+  document.querySelectorAll('.mobile-panel a').forEach(a=>{
+    a.addEventListener('click', ()=> { panel.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); });
+  });
+</script>
+
+</body>
+</html>
